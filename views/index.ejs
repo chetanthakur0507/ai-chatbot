@@ -15,14 +15,33 @@
     <button type="submit">Ask</button>
   </form>
 
-  <% if (answer) { %>
+  <!-- <% if (answer) { %>
     <h2>Q: <%= question %></h2>
     <h3>A: <%= answer %></h3>
-    <script src="/script.js"></script>
+    <script src="script.js"></script>
     <script>
       speak("<%= answer %>");
     </script>
   <% } %>
+ -->
+
+
+  <% if (answer) { %>
+    <h2>Q: <%= question %></h2>
+    <h3>A: <%= answer %></h3>
+    <script>
+      function speak(text) {
+        speechSynthesis.cancel(); // stop any ongoing speech
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.8;
+        speechSynthesis.speak(utterance);
+      }
+
+      speak("<%= answer %>");
+    </script>
+  <% } %>
+
+
 </div>
 </body>
 </html> 
